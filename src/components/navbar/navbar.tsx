@@ -34,9 +34,9 @@ const NavBar: React.FC = () => {
   useOutsideClick({ refs: cartRef, callback: () => setIsCartOpen(false), enabled: isCartOpen });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       {/* Navbar */}
-      <nav className={'fixed top-0 z-50 w-full bg-white border-b transition-colors border-gray-100'}>
+      <nav className={'fixed top-0 z-50 w-full bg-white border-b transition-colors border-gray-100 shadow-sm'}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
