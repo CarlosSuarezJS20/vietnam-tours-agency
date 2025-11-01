@@ -23,7 +23,7 @@ export function useOutsideClick<T extends HTMLElement = HTMLElement>({
   useEffect(() => {
     if (!enabled) return;
 
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
       const refArray = Array.isArray(refs) ? refs : [refs];
 
@@ -37,10 +37,13 @@ export function useOutsideClick<T extends HTMLElement = HTMLElement>({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    // Add both click and touchend for mobile support (using click instead of mousedown to prevent conflicts)
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('touchend', handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('touchend', handleClickOutside);
     };
   }, [refs, callback, enabled]);
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter, lusitana } from "../components/ui/fonts";
+import { inter } from "../components/ui/fonts";
 import NavBar from '../components/navbar/navbar';
 import "./globals.css";
 

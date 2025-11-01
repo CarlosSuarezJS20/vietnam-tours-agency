@@ -63,8 +63,8 @@ const NavBar: React.FC = () => {
 
             {/* Desktop Cart Icon */}
             <div className="hidden md:flex items-center relative" ref={cartRef}>
-              <Button onClick={toggleCart} size="md" showBadge={false}>
-                <ShoppingCart className="w-6 h-6" />
+              <Button onClick={toggleCart} variant="ghost" size="icon">
+                <ShoppingCart className="w-6 h-6 stroke-current" />
               </Button>
 
               {/* Cart Dropdown */}
@@ -75,7 +75,7 @@ const NavBar: React.FC = () => {
                     <div className="space-y-3">
                       {/* Empty cart state */}
                       <div className="text-center py-8">
-                        <ShoppingCart className="w-12 h-12 mx-auto text-gray-300 mb-2" />
+                        <ShoppingCart className="w-12 h-12 mx-auto text-blue-900 mb-2" />
                         <p className="text-sm text-gray-600">Your cart is empty</p>
                       </div>
 
@@ -103,8 +103,8 @@ const NavBar: React.FC = () => {
             {/* Mobile Cart Icon and Menu Button */}
             <div className="md:hidden flex items-center space-x-2">
               <div className="relative" ref={cartRef}>
-                <Button onClick={toggleCart} size="md" showBadge={true}>
-                  <ShoppingCart className="w-6 h-6" />
+                <Button onClick={toggleCart} variant="ghost" size="icon">
+                  <ShoppingCart className="w-6 h-6 stroke-current" />
                 </Button>
 
                 {/* Mobile Cart Dropdown */}
@@ -129,8 +129,8 @@ const NavBar: React.FC = () => {
                 )}
               </div>
 
-              <Button onClick={toggleMenu} size="sm" showBadge={false}>
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Button onClick={toggleMenu} variant="ghost" size="icon">
+                {isMenuOpen ? <X className="w-6 h-6 stroke-current" /> : <Menu className="w-6 h-6 stroke-current" />}
               </Button>
             </div>
           </div>
