@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
               alt="Vietnamese craftswomen working with green fishing nets"
               priority
               fill
-              className="object-cover"
+              className="object-cover opacity-85"
               sizes="100vw"
             />
         </section>

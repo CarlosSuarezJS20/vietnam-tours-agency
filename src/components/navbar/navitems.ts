@@ -10,14 +10,20 @@ export const navItems: NavItem[] = [
     id: 'our-tours',
     label: 'Our Tours',
     links: [
-      { href: '#', label: 'Soon' },
+      { href: '/tours/north', label: 'Northern Vietnam' },
+      { href: '/tours/central', label: 'Central Vietnam' },
+      { href: '/tours/south', label: 'Southern Vietnam' },
+      { href: '/tours/custom', label: 'Custom Tours' },
+      { href: '/tours/discover-vietnam', label: 'All Tours and Activities' }
     ],
   },
   {
-    id: 'daily-activities',
-    label: 'Daily Activities',
+    id: 'day-tours',
+    label: 'Day Tours',
     links: [
-      { href: '#', label: 'soon' },
+      { href: '/day-tours/hanoi', label: 'From Hanoi' },
+      { href: '/day-tours/hoi-an', label: 'From Hoi An' },
+      { href: '/day-tours/saigon', label: 'From Saigon' },
     ],
   },
   {

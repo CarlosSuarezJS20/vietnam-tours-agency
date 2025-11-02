@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Menu, X, ShoppingCart } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { DesktopNavBar, MobileNavBar, DropdownMenu } from '.';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { Button } from '../ui';
@@ -21,12 +23,21 @@ const NavBar: React.FC = () => {
   };
 
   const toggleDropdown = (linkName: string) => {
+    console.log('toggleDropdown', linkName);
     setActiveDropdown(activeDropdown === linkName ? null : linkName);
   };
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
+
+  const pathname = usePathname();
+
+  // Close dropdowns and mobile menu when pathname changes
+  useEffect(() => {
+    setActiveDropdown(null);
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   // Close dropdowns when clicking outside
   useOutsideClick({ refs: dropdownRef, callback: () => setActiveDropdown(null), enabled: !!activeDropdown });
@@ -40,7 +51,7 @@ const NavBar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
               {/* Logo Graphic */}
               <div className="w-10 h-10 bg-gradient-to-br from-teal-600 via-teal-500 to-teal-400 rounded-md flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-500 rounded-sm"></div>
@@ -52,18 +63,19 @@ const NavBar: React.FC = () => {
                 <h1 className="text-xl font-bold text-blue-900">Travel | Vietnam</h1>
                 <p className="text-xs text-blue-600 -mt-1">by VIETNAMIA</p>
               </div>
-            </div>
+            </Link>
 
             {/* Desktop Navigation Links */}
             <DesktopNavBar
               activeDropdown={activeDropdown}
               toggleDropdown={toggleDropdown}
               dropdownRef={dropdownRef}
+              closeDropdown={() => setActiveDropdown(null)}
             />
 
             {/* Desktop Cart Icon */}
             <div className="hidden md:flex items-center relative" ref={cartRef}>
-              <Button onClick={toggleCart} variant="ghost" size="icon">
+              <Button onClick={toggleCart} variant="ghost" size="icon" className="h-12 w-12">
                 <ShoppingCart className="w-6 h-6 stroke-current" />
               </Button>
 
@@ -103,7 +115,7 @@ const NavBar: React.FC = () => {
             {/* Mobile Cart Icon and Menu Button */}
             <div className="md:hidden flex items-center space-x-2">
               <div className="relative" ref={cartRef}>
-                <Button onClick={toggleCart} variant="ghost" size="icon">
+                <Button onClick={toggleCart} variant="ghost" size="icon" className="h-12 w-12">
                   <ShoppingCart className="w-6 h-6 stroke-current" />
                 </Button>
 
@@ -129,7 +141,7 @@ const NavBar: React.FC = () => {
                 )}
               </div>
 
-              <Button onClick={toggleMenu} variant="ghost" size="icon">
+              <Button onClick={toggleMenu} variant="ghost" size="icon" className="h-12 w-12">
                 {isMenuOpen ? <X className="w-6 h-6 stroke-current" /> : <Menu className="w-6 h-6 stroke-current" />}
               </Button>
             </div>
@@ -138,7 +150,7 @@ const NavBar: React.FC = () => {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <MobileNavBar activeDropdown={activeDropdown} toggleDropdown={toggleDropdown} mobileMenuRef={mobileMenuRef as React.RefObject<HTMLDivElement>} />
+          <MobileNavBar mobileMenuRef={mobileMenuRef as React.RefObject<HTMLDivElement>} toggleMenu={toggleMenu}/>
         )}
       </nav>
     </div>

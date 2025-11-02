@@ -10,9 +10,10 @@ interface DesktopNavBarProps {
   activeDropdown: string | null;
   toggleDropdown: (linkName: string) => void;
   dropdownRef: React.RefObject<HTMLDivElement | null>;
+  closeDropdown: () => void;
 }
 
-const DesktopNavBar: React.FC<DesktopNavBarProps> = ({ activeDropdown, toggleDropdown, dropdownRef }) => {
+const DesktopNavBar: React.FC<DesktopNavBarProps> = ({ activeDropdown, toggleDropdown, dropdownRef, closeDropdown }) => {
   const pathname = usePathname();
 
   return (
@@ -25,6 +26,7 @@ const DesktopNavBar: React.FC<DesktopNavBarProps> = ({ activeDropdown, toggleDro
               onClick={(e) => {
                 e.stopPropagation();
                 toggleDropdown(item.id);
+                console.log('activeDropdown', activeDropdown);
               }}
               className={`flex items-center h-full text-gray-700 hover:text-gray-900 hover:font-bold font-medium transition-all duration-200 border-b-2 ${activeDropdown === item.id
                 ? 'font-bold text-gray-900 border-teal-500'
@@ -47,6 +49,7 @@ const DesktopNavBar: React.FC<DesktopNavBarProps> = ({ activeDropdown, toggleDro
                       <li key={link.href}>
                         <Link
                           href={link.href}
+                          onClick={closeDropdown}
                           className="block text-sm text-gray-700 hover:text-teal-600 transition-colors"
                         >
                           {link.label}
